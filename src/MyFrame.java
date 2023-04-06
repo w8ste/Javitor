@@ -9,18 +9,29 @@ public class MyFrame extends JFrame {
         this.setLayout(null);
         this.setSize(500, 500);
         this.setVisible(true);
-        JButton b = new JButton();
-        b.setBounds(200, 0, 100, 50);
-        JTextArea area = new JTextArea();
-        area.setVisible(true);
-        area.setLayout(null);
-        area.setBounds(0, 110, 500, 500);
-        this.add(area);
-        this.add(b);
+
+
 
 
 
 
     }
+
+    public void makeButton() {
+        JButton b = new JButton();
+        b.setBounds(200, 0, 75, 35);
+        this.add(b);
+    }
+
+    public void makeTextArea() {
+        JTextArea area = new JTextArea();
+        area.setVisible(true);
+        area.setLayout(null);
+        area.setBounds(0, 40, 500, 500);
+        this.add(area);
+
+    }
+
+
 
 }
