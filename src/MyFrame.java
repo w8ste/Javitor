@@ -12,48 +12,6 @@ public class MyFrame extends JFrame {
     private JTextArea textArea;
     private JPanel panel;
     public MyFrame() {
-        /*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.setSize(500, 500);
-        this.setVisible(true);
-
-        makeButton();
-        makeTextArea();*/
-
-        /*
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(1, 3));
-        buttonPanel.setPreferredSize(new Dimension(100, 35));
-        buttonPanel.setMaximumSize(new Dimension(100, 600));
-
-        JButton saveButton = new JButton();
-        saveButton.setText("Save");
-        saveButton.setSize(100, 35);
-        JButton newFileButton = new JButton();
-        newFileButton.setText("New File");
-        newFileButton.setSize(100, 35);
-        JButton clearButton = new JButton();
-        clearButton.setText("Clear");
-        clearButton.setSize(100, 35);
-
-        buttonPanel.add(saveButton);
-        buttonPanel.add(newFileButton);
-        buttonPanel.add(clearButton);
-
-        Location[][] array = null;
-        JPanel centerPanel = new JPanel();
-        centerPanel.setPreferredSize(new Dimension(600, 600));
-        centerPanel.setMinimumSize(new Dimension(600, 600));
-
-        JPanel leftPanel = new JPanel();
-        leftPanel.setPreferredSize(new Dimension(100, 600));
-        JPanel northPanel = new JPanel();
-        northPanel.setPreferredSize(new Dimension(800, 100));
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(800, 100));
-
-        this.add(buttonPanel, BorderLayout.NORTH);*/
-
 
         makeTextArea();
         makeButton();
@@ -66,14 +24,6 @@ public class MyFrame extends JFrame {
     }
 
     public void makeButton() {
-        /*jButton = new JButton();
-        jButton.setBounds(200, 3, 75, 35);
-        jButton.addActionListener(e -> {
-            //this is a placeholder
-            if(e.getSource() == jButton) System.out.println(textArea.getText());
-        });
-
-        this.add(jButton, BorderLayout.NORTH);*/
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));
@@ -83,12 +33,17 @@ public class MyFrame extends JFrame {
         JButton saveButton = new JButton();
         saveButton.setText("Save");
         saveButton.setSize(100, 35);
+        saveButton.addActionListener(e -> System.out.println(textArea.getText()));
+
         JButton newFileButton = new JButton();
         newFileButton.setText("New File");
         newFileButton.setSize(100, 35);
+        newFileButton.addActionListener(e -> new MyFrame());
+
         JButton clearButton = new JButton();
         clearButton.setText("Clear");
         clearButton.setSize(100, 35);
+        clearButton.addActionListener(e -> textArea.setText(""));
 
         buttonPanel.add(saveButton);
         buttonPanel.add(newFileButton);
