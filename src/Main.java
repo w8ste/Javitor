@@ -6,9 +6,8 @@ public class Main {
     }
 
     public static void start() {
-        MyFrame mainFrame = new MyFrame();
-        mainFrame.makeButton();
-        mainFrame.makeTextArea();
+        new MyFrame();
+
     }
 
 }
