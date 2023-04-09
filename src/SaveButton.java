@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class SaveButton extends JButton {
 
@@ -18,16 +19,38 @@ public class SaveButton extends JButton {
             JFileChooser chooser = new JFileChooser();
             int response = chooser.showSaveDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
-                try(FileWriter fw = new FileWriter(chooser.getSelectedFile()+".txt")) {
-                    fw.write(textArea.getText());
-                    fw.close();
-
-            }   catch (Exception ex) {
-                    System.out.println("Error");
+                String s = chooser.getSelectedFile().toString();
+                if(isDefaultFormat(s)) {
+                    try(FileWriter fw = new FileWriter(chooser.getSelectedFile()+".txt")) {
+                        fw.write(textArea.getText());
+                        fw.close();
+                    }catch (Exception ex) {
+                        System.out.println("Error");
+                    }
+                }
+                else {
+                    try(FileWriter fw = new FileWriter(chooser.getSelectedFile())) {
+                        fw.write(textArea.getText());
+                        fw.close();
+                    }catch (Exception ex) {
+                        System.out.println("Error");
+                    }
                 }
 
             }
         });
     }
+
+    private boolean isDefaultFormat(String s) {
+        char[] arr = s.toCharArray();
+        for(char c : arr) {
+            if(c == '.') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
 }
