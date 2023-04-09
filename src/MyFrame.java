@@ -9,13 +9,13 @@ import java.util.EventListener;
 public class MyFrame extends JFrame {
 
     private JButton jButton;
-    private JTextArea textArea;
+    public static JTextArea textArea;
     private JPanel panel;
     public MyFrame() {
 
         makeTextArea();
         makeButton();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -30,10 +30,11 @@ public class MyFrame extends JFrame {
         buttonPanel.setPreferredSize(new Dimension(100, 35));
         buttonPanel.setMaximumSize(new Dimension(100, 600));
 
-        JButton saveButton = new JButton();
+        /*JButton saveButton = new JButton();
         saveButton.setText("Save");
         saveButton.setSize(100, 35);
-        saveButton.addActionListener(e -> System.out.println(textArea.getText()));
+        saveButton.addActionListener(e -> System.out.println(textArea.getText()));*/
+        SaveButton saveButton = new SaveButton(textArea);
 
         JButton newFileButton = new JButton();
         newFileButton.setText("New File");
