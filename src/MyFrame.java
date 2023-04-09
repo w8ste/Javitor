@@ -1,26 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JButton;
-import javax.xml.stream.Location;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.EventListener;
 public class MyFrame extends JFrame {
-
-    private JButton jButton;
-    public static JTextArea textArea;
-    private JPanel panel;
+    private JTextArea textArea;
     public MyFrame() {
-
         makeTextArea();
         makeButton();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-
-
+        this.setLayout(new BorderLayout());
     }
 
     public void makeButton() {
@@ -30,10 +21,6 @@ public class MyFrame extends JFrame {
         buttonPanel.setPreferredSize(new Dimension(100, 35));
         buttonPanel.setMaximumSize(new Dimension(100, 600));
 
-        /*JButton saveButton = new JButton();
-        saveButton.setText("Save");
-        saveButton.setSize(100, 35);
-        saveButton.addActionListener(e -> System.out.println(textArea.getText()));*/
         SaveButton saveButton = new SaveButton(textArea);
 
         JButton newFileButton = new JButton();

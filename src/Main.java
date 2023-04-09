@@ -7,6 +7,10 @@ public class Main {
 
     public static void start() {
         new MyFrame();
+        /*
+        under construction
+        new WelcomeScreen();
+        */
 
     }
 
