@@ -5,12 +5,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.LinkedList;
 
-import static jdk.internal.org.jline.utils.InfoCmp.Capability.newline;
 
 public class LoadButton extends JButton {
 
     public LoadButton() {
-        this.setText("Save");
+        this.setText("Load");
         this.setSize(new Dimension(100, 35));
 
         clickAction();
@@ -30,10 +29,12 @@ public class LoadButton extends JButton {
                         list.add((char)data);
                         data = fileReader.read();
                     }
+                    fileReader.close();
+                    new MyFrame(list.toString());
                     //write text to file
 
                 } catch(Exception ex) {
-
+                    System.out.println("Error");
                 }
 
 
