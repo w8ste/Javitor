@@ -11,7 +11,7 @@ public class MyFrame extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setLayout(new BorderLayout());
+
     }
 
     public void makeButton() {
