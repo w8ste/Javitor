@@ -8,10 +8,11 @@ import java.util.LinkedList;
 
 public class LoadButton extends JButton {
 
-    public LoadButton() {
+    private JFrame parentFrame;
+    public LoadButton(JFrame parentFrame) {
         this.setText("Load");
         this.setSize(new Dimension(100, 35));
-
+        this.parentFrame = parentFrame;
         clickAction();
     }
 
@@ -36,10 +37,12 @@ public class LoadButton extends JButton {
                     }
                     new MyFrame(s.toString());
                     //write text to file
+                    parentFrame.dispose();
 
                 } catch(Exception ex) {
                     System.out.println("Error");
                 }
+
 
 
             }

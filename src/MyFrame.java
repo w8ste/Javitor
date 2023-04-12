@@ -32,7 +32,7 @@ public class MyFrame extends JFrame {
 
         SaveButton saveButton = new SaveButton(textArea);
 
-        LoadButton loadButton = new LoadButton();
+        LoadButton loadButton = new LoadButton(this);
 
         JButton newFileButton = new JButton();
         newFileButton.setText("New File");
