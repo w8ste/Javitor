@@ -30,7 +30,11 @@ public class LoadButton extends JButton {
                         data = fileReader.read();
                     }
                     fileReader.close();
-                    new MyFrame(list.toString());
+                    StringBuilder s = new StringBuilder();
+                    for(Character c : list)  {
+                        s.append(c);
+                    }
+                    new MyFrame(s.toString());
                     //write text to file
 
                 } catch(Exception ex) {
