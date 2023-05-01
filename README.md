@@ -1,2 +1,16 @@
 # Javitor
-A Java based text editor i write because im bored
+
+
+![Alt text](https://github.com/w8ste/books/blob/main/2023-04-12-221444_1920x1080_scrot.png)
+
+Javitor is a Javitor text editor written in Java. I started this projects due to my interest in text editors like vim.
+I choose Java since i wanted to practice it, since it is the most thought programming language in lower semesters 
+at my univerity. It is still in its early stage but already has all of the utilities a very minimal text editor 
+has.
+
+![Alt text](https://github.com/w8ste/books/blob/main/2023-04-12-222443_1920x1080_scrot.png)
+
+
+My i3 config for example:
+
+![Alt text](https://github.com/w8ste/books/blob/main/2023-04-12-223514_1920x1080_scrot.png)
