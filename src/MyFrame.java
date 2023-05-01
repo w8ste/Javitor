@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 public class MyFrame extends JFrame {
     private JTextArea textArea;
@@ -14,6 +15,10 @@ public class MyFrame extends JFrame {
 
     }
 
+    /*
+     only used when creating a frame with content inside
+     e.g. when loading a file
+     */
     public MyFrame(String s) {
         makeTextArea(s);
         makeButton();
@@ -66,10 +71,14 @@ public class MyFrame extends JFrame {
         textArea.setVisible(true);
         textArea.setLayout(null);
         JPanel areaPanel = new JPanel();
+
+        //create scrollpane
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
         areaPanel.setLayout(new GridLayout(1, 1));
         areaPanel.setPreferredSize(new Dimension(550, 400));
         areaPanel.setMaximumSize(new Dimension(1000, 5000));
-        areaPanel.add(textArea, BorderLayout.CENTER);
+        areaPanel.add(scrollPane, BorderLayout.CENTER);
         this.add(areaPanel);
     }
 
