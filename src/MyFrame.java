@@ -1,17 +1,32 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class MyFrame extends JFrame {
     private JTextArea textArea;
+    private JMenuBar jMenuBar;
+    private JMenu file;
+
+    JMenuBar menuBar;
+    JMenu fileMenu;
+    JMenuItem openItem;
+    JMenuItem saveItem;
+    JMenuItem exitItem;
+
     public MyFrame() {
-        makeTextArea();
-        makeButton();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
+        createMenuBar();
+        makeButton();
+        makeTextArea();
         this.setVisible(true);
+
 
     }
 
@@ -22,6 +37,7 @@ public class MyFrame extends JFrame {
     public MyFrame(String s) {
         makeTextArea(s);
         makeButton();
+        createMenuBar();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
@@ -55,6 +71,8 @@ public class MyFrame extends JFrame {
         buttonPanel.add(clearButton);
 
         this.add(buttonPanel, BorderLayout.NORTH);
+
+        //while(true) if(textArea.getText().toCharArray()[0] == 'a') textArea.setText("Hello World");
     }
 
     public void makeTextArea() {
@@ -79,8 +97,31 @@ public class MyFrame extends JFrame {
         areaPanel.setPreferredSize(new Dimension(550, 400));
         areaPanel.setMaximumSize(new Dimension(1000, 5000));
         areaPanel.add(scrollPane, BorderLayout.CENTER);
+
+
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
         this.add(areaPanel);
+
     }
+
+    private void createMenuBar() {
+        jMenuBar = new JMenuBar();
+        file = new JMenu("File");
+
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu("File");
+        openItem = new JMenuItem("Open");
+        saveItem = new JMenuItem("Save");
+        exitItem = new JMenuItem("Exit");
+
+        exitItem.addActionListener(new fileMenuBarListener(this, exitItem));
+        fileMenu.add(exitItem);
+        menuBar.add(fileMenu);
+        menuBar.setVisible(true);
+        this.setJMenuBar(menuBar);
+    }
+
 
 
 }
