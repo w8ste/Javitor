@@ -107,7 +107,7 @@ public class MyFrame extends JFrame {
 
     private void createMenuBar() {
         menuBar = new JMenuBar();
-        menuBar.add(new fileMenuBar(this, "File"));
+        menuBar.add(new fileMenuBar(this, textArea,"File"));
         menuBar.setVisible(true);
         this.setJMenuBar(menuBar);
     }
