@@ -87,13 +87,18 @@ public class MyFrame extends JFrame {
 
         try
         {
-            StyledDocument doc = textArea.getStyledDocument();
-            int length = doc.getLength();
-            String text = doc.getText(0, length);
-            Matcher m = pattern.matcher(text);
+            StyledDocument document = textArea.getStyledDocument();
+            int length = document.getLength();
+            String text = document.getText(0, length);
+            Matcher matcher = pattern.matcher(text);
 
-            while(m.find())
-                doc.setCharacterAttributes(m.start(), (m.end() - m.start()), keyword, false);
+            //create multiple matcher for different kinds of code ?
+
+            while(matcher.find())
+                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, false);
+
+            /* After every match change color accordingly
+            StyleConstants.setForeground(keyword, Color.BLUE); */
         }
         catch (Exception e) { System.out.println(e); }
     }
@@ -122,9 +127,6 @@ public class MyFrame extends JFrame {
         areaPanel.setMaximumSize(new Dimension(1000, 5000));
         areaPanel.add(scrollPane, BorderLayout.CENTER);
 
-
-        //textArea.setLineWrap(true);
-        //textArea.setWrapStyleWord(true);
         this.add(areaPanel);
 
     }
