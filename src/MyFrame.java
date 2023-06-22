@@ -1,22 +1,25 @@
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class MyFrame extends JFrame {
-    private JTextArea textArea;
+    private JTextPane textArea;
     private JMenuBar jMenuBar;
     private JMenu file;
-
     JMenuBar menuBar;
     JMenu fileMenu;
     JMenuItem openItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
+
+
+    String regex = "\\b(class|int|void|static|final|public|private|protected|float|if|else|for|while|try|catch|boolean|import|return)\\b";
+    Pattern pattern = Pattern.compile(regex);
 
     public MyFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -60,10 +63,12 @@ public class MyFrame extends JFrame {
         newFileButton.setSize(100, 35);
         newFileButton.addActionListener(e -> new MyFrame());
 
+
+
         JButton clearButton = new JButton();
-        clearButton.setText("Clear");
+        clearButton.setText("High");
         clearButton.setSize(100, 35);
-        clearButton.addActionListener(e -> textArea.setText(""));
+        clearButton.addActionListener(e -> highlight());
 
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
@@ -72,16 +77,35 @@ public class MyFrame extends JFrame {
 
         this.add(buttonPanel, BorderLayout.NORTH);
 
-        //while(true) if(textArea.getText().toCharArray()[0] == 'a') textArea.setText("Hello World");
+    }
+
+
+    private void highlight()
+    {
+        SimpleAttributeSet keyword = new SimpleAttributeSet();
+        StyleConstants.setForeground(keyword, Color.RED);
+
+        try
+        {
+            StyledDocument doc = textArea.getStyledDocument();
+            int length = doc.getLength();
+            String text = doc.getText(0, length);
+            Matcher m = pattern.matcher(text);
+
+            while(m.find())
+                doc.setCharacterAttributes(m.start(), (m.end() - m.start()), keyword, false);
+        }
+        catch (Exception e) { System.out.println(e); }
     }
 
     public void makeTextArea() {
-        textArea = new JTextArea();
+        textArea = new JTextPane();
         initializeArea();
     }
 
     public void makeTextArea(String s) {
-        textArea = new JTextArea(s);
+        textArea = new JTextPane();
+        textArea.setText(s);
         initializeArea();
     }
 
@@ -99,8 +123,8 @@ public class MyFrame extends JFrame {
         areaPanel.add(scrollPane, BorderLayout.CENTER);
 
 
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
+        //textArea.setLineWrap(true);
+        //textArea.setWrapStyleWord(true);
         this.add(areaPanel);
 
     }

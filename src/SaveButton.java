@@ -1,13 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class SaveButton extends JButton {
 
-    private final JTextArea textArea;
+    private final JTextPane textArea;
 
-    public SaveButton(JTextArea textArea) {
+    public SaveButton(JTextPane textArea) {
         this.setText("Save");
         this.setSize(new Dimension(100, 35));
         this.textArea = textArea;
