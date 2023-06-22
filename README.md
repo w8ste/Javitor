@@ -17,4 +17,4 @@ My i3 config for example:
 
 
 # TODO:
-- Fix syntax highlighting, so that it updates a keyword correcty, without having to press another key.
+- Fix syntax highlighting, so that it updates a keyword correcty without having to press another key.
