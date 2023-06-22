@@ -14,3 +14,7 @@ has.
 My i3 config for example:
 
 ![Alt text](https://github.com/w8ste/books/blob/main/2023-04-12-223514_1920x1080_scrot.png)
+
+
+# TODO:
+- Fix syntax highlighting, so that it updates a keyword correcty, without having to press another key.
