@@ -3,6 +3,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,25 +82,31 @@ public class MyFrame extends JFrame {
     }
 
 
-    private void highlight()
+    void highlight()
     {
         SimpleAttributeSet keyword = new SimpleAttributeSet();
-        StyleConstants.setForeground(keyword, Color.RED);
+        StyleConstants.setForeground(keyword, Color.BLACK);
 
         try
         {
+
             StyledDocument document = textArea.getStyledDocument();
-            int length = document.getLength();
-            String text = document.getText(0, length);
+            String text = document.getText(0, document.getLength());
             Matcher matcher = pattern.matcher(text);
 
+            document.setCharacterAttributes(0, document.getLength(), keyword, true);
+            StyleConstants.setForeground(keyword, Color.RED);
             //create multiple matcher for different kinds of code ?
 
-            while(matcher.find())
-                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, false);
+            while(matcher.find()) {
+                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
+            }
 
             /* After every match change color accordingly
             StyleConstants.setForeground(keyword, Color.BLUE); */
+
+            StyleConstants.setForeground(keyword, Color.BLACK);
+            document.setCharacterAttributes(document.getLength(), 1, keyword, true);
         }
         catch (Exception e) { System.out.println(e); }
     }
@@ -115,6 +123,8 @@ public class MyFrame extends JFrame {
     }
 
     private void initializeArea() {
+        textArea.addKeyListener(new KeyChecker(this));
+
         textArea.setVisible(true);
         textArea.setLayout(null);
         JPanel areaPanel = new JPanel();
@@ -138,6 +148,16 @@ public class MyFrame extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
-
-
 }
+
+class KeyChecker extends KeyAdapter {
+    MyFrame myFrame;
+    public KeyChecker(MyFrame myFrame) {
+         this.myFrame = myFrame;
+    }
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        myFrame.highlight();
+    }
+}
+
