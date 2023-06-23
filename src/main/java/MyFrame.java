@@ -11,8 +11,6 @@ import java.util.regex.Pattern;
 
 public class MyFrame extends JFrame {
     private JTextPane textArea;
-    private JMenuBar jMenuBar;
-    private JMenu file;
     JMenuBar menuBar;
     JMenu fileMenu;
     JMenuItem openItem;
@@ -27,12 +25,11 @@ public class MyFrame extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
+        this.setSize(new Dimension(500, 500));
         createMenuBar();
         makeButton();
         makeTextArea();
         this.setVisible(true);
-
-
     }
 
     /*
@@ -78,7 +75,6 @@ public class MyFrame extends JFrame {
         buttonPanel.add(clearButton);
 
         this.add(buttonPanel, BorderLayout.NORTH);
-
     }
 
 
@@ -124,7 +120,7 @@ public class MyFrame extends JFrame {
 
     private void initializeArea() {
         textArea.addKeyListener(new KeyChecker(this));
-
+        textArea.setBounds(50, 50, 500, 500);
         textArea.setVisible(true);
         textArea.setLayout(null);
         JPanel areaPanel = new JPanel();
