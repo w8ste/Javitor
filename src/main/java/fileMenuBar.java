@@ -1,13 +1,14 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.LinkedList;
 
 public class fileMenuBar extends JMenu implements ActionListener {
-
+    
     private final JMenuItem exit;
     private final JMenuItem newFile;
     private final JMenuItem save;
@@ -57,7 +58,6 @@ public class fileMenuBar extends JMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(exit)) {
             frame.dispose();
-            System.out.println("Hello");
         }
         else if(e.getSource() == newFile) {
             frame.dispose();
