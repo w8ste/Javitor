@@ -10,9 +10,14 @@ import java.util.regex.Pattern;
 
 
 public class MyFrame extends JFrame {
+    
+    /*
+     * 0: no syntax highlighting
+     * 1: Java
+     */
+    private int lang = 0;
+
     private JTextPane textArea;
-    private JMenuBar jMenuBar;
-    private JMenu file;
     JMenuBar menuBar;
     JMenu fileMenu;
     JMenuItem openItem;
@@ -25,6 +30,7 @@ public class MyFrame extends JFrame {
 
     public MyFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        textArea.setBounds(50, 50, 500, 500);
         this.pack();
         this.setLocationRelativeTo(null);
         createMenuBar();
@@ -86,29 +92,42 @@ public class MyFrame extends JFrame {
     {
         SimpleAttributeSet keyword = new SimpleAttributeSet();
         StyleConstants.setForeground(keyword, Color.BLACK);
+        if(lang == 0) {
+            try{
+                StyledDocument document= textArea.getStyledDocument();
+                String text = document.getText(0, document.getLength());
+                Matcher matcher = pattern.matcher(text);
+                document.setCharacterAttributes(0, document.getLength(), keyword, true);
 
-        try
-        {
-
-            StyledDocument document = textArea.getStyledDocument();
-            String text = document.getText(0, document.getLength());
-            Matcher matcher = pattern.matcher(text);
-
-            document.setCharacterAttributes(0, document.getLength(), keyword, true);
-            StyleConstants.setForeground(keyword, Color.RED);
-            //create multiple matcher for different kinds of code ?
-
-            while(matcher.find()) {
-                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
-            }
-
-            /* After every match change color accordingly
-            StyleConstants.setForeground(keyword, Color.BLUE); */
-
-            StyleConstants.setForeground(keyword, Color.BLACK);
-            document.setCharacterAttributes(document.getLength(), 1, keyword, true);
+                while (matcher.find()) {
+                    document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
+                }
+            }catch(Exception e) { System.out.println(e); }
         }
-        catch (Exception e) { System.out.println(e); }
+        if(lang == 1) {
+            try
+            {
+
+                StyledDocument document = textArea.getStyledDocument();
+                String text = document.getText(0, document.getLength());
+                Matcher matcher = pattern.matcher(text);
+
+                document.setCharacterAttributes(0, document.getLength(), keyword, true);
+                StyleConstants.setForeground(keyword, Color.RED);
+                //create multiple matcher for different kinds of code ?
+
+                while(matcher.find()) {
+                    document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
+                }
+
+                /* After every match change color accordingly
+                   StyleConstants.setForeground(keyword, Color.BLUE); */
+
+                StyleConstants.setForeground(keyword, Color.BLACK);
+                document.setCharacterAttributes(document.getLength(), 1, keyword, true);
+            }
+            catch (Exception e) { System.out.println(e); }
+        }
     }
 
     public void makeTextArea() {
@@ -144,8 +163,18 @@ public class MyFrame extends JFrame {
     private void createMenuBar() {
         menuBar = new JMenuBar();
         menuBar.add(new fileMenuBar(this, textArea,"File"));
+        
+        menuBar.add(new HighlightBar(this, "Highlights"));
+        
         menuBar.setVisible(true);
         this.setJMenuBar(menuBar);
+    }
+
+
+    public void setLang(int value) {
+        if(value >= 0 && value < 3) {
+            lang = value;
+        }
     }
 
 }
