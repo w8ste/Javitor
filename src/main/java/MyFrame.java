@@ -1,22 +1,27 @@
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class MyFrame extends JFrame {
-    private JTextArea textArea;
+    private JTextPane textArea;
     private JMenuBar jMenuBar;
     private JMenu file;
-
     JMenuBar menuBar;
     JMenu fileMenu;
     JMenuItem openItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
+    
+
+    String regex = "\\b(class|int|void|static|final|public|private|protected|float|if|else|for|while|try|catch|boolean|import|return)\\b";
+    Pattern pattern = Pattern.compile(regex);
 
     public MyFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -60,10 +65,12 @@ public class MyFrame extends JFrame {
         newFileButton.setSize(100, 35);
         newFileButton.addActionListener(e -> new MyFrame());
 
+
+
         JButton clearButton = new JButton();
-        clearButton.setText("Clear");
+        clearButton.setText("Highlight");
         clearButton.setSize(100, 35);
-        clearButton.addActionListener(e -> textArea.setText(""));
+        clearButton.addActionListener(e -> highlight());
 
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
@@ -72,20 +79,52 @@ public class MyFrame extends JFrame {
 
         this.add(buttonPanel, BorderLayout.NORTH);
 
-        //while(true) if(textArea.getText().toCharArray()[0] == 'a') textArea.setText("Hello World");
+    }
+
+
+    void highlight()
+    {
+        SimpleAttributeSet keyword = new SimpleAttributeSet();
+        StyleConstants.setForeground(keyword, Color.BLACK);
+
+        try
+        {
+
+            StyledDocument document = textArea.getStyledDocument();
+            String text = document.getText(0, document.getLength());
+            Matcher matcher = pattern.matcher(text);
+
+            document.setCharacterAttributes(0, document.getLength(), keyword, true);
+            StyleConstants.setForeground(keyword, Color.RED);
+            //create multiple matcher for different kinds of code ?
+
+            while(matcher.find()) {
+                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
+            }
+
+            /* After every match change color accordingly
+            StyleConstants.setForeground(keyword, Color.BLUE); */
+
+            StyleConstants.setForeground(keyword, Color.BLACK);
+            document.setCharacterAttributes(document.getLength(), 1, keyword, true);
+        }
+        catch (Exception e) { System.out.println(e); }
     }
 
     public void makeTextArea() {
-        textArea = new JTextArea();
+        textArea = new JTextPane();
         initializeArea();
     }
 
     public void makeTextArea(String s) {
-        textArea = new JTextArea(s);
+        textArea = new JTextPane();
+        textArea.setText(s);
         initializeArea();
     }
 
     private void initializeArea() {
+        textArea.addKeyListener(new KeyChecker(this));
+
         textArea.setVisible(true);
         textArea.setLayout(null);
         JPanel areaPanel = new JPanel();
@@ -98,9 +137,6 @@ public class MyFrame extends JFrame {
         areaPanel.setMaximumSize(new Dimension(1000, 5000));
         areaPanel.add(scrollPane, BorderLayout.CENTER);
 
-
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
         this.add(areaPanel);
 
     }
@@ -112,6 +148,16 @@ public class MyFrame extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
-
-
 }
+
+class KeyChecker extends KeyAdapter {
+    MyFrame myFrame;
+    public KeyChecker(MyFrame myFrame) {
+         this.myFrame = myFrame;
+    }
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        myFrame.highlight();
+    }
+}
+

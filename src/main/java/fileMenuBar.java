@@ -13,9 +13,9 @@ public class fileMenuBar extends JMenu implements ActionListener {
     private final JMenuItem save;
     private final JMenuItem load;
     private final JMenuItem clear;
-    private final JTextArea textArea;
+    private final JTextPane textArea;
     JFrame frame;
-    public fileMenuBar(JFrame frame, JTextArea textArea, String name) {
+    public fileMenuBar(JFrame frame, JTextPane textArea, String name) {
         super(name);
 
         //create save item
