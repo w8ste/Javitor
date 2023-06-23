@@ -18,7 +18,7 @@ public class MyFrame extends JFrame {
     JMenuItem openItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
-
+    
 
     String regex = "\\b(class|int|void|static|final|public|private|protected|float|if|else|for|while|try|catch|boolean|import|return)\\b";
     Pattern pattern = Pattern.compile(regex);
@@ -68,7 +68,7 @@ public class MyFrame extends JFrame {
 
 
         JButton clearButton = new JButton();
-        clearButton.setText("High");
+        clearButton.setText("Highlight");
         clearButton.setSize(100, 35);
         clearButton.addActionListener(e -> highlight());
 
