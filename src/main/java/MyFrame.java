@@ -24,13 +24,11 @@ public class MyFrame extends JFrame {
     JMenuItem saveItem;
     JMenuItem exitItem;
     
-
     String regex = "\\b(class|int|void|static|final|public|private|protected|float|if|else|for|while|try|catch|boolean|import|return)\\b";
     Pattern pattern = Pattern.compile(regex);
 
     public MyFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        textArea.setBounds(50, 50, 500, 500);
         this.pack();
         this.setLocationRelativeTo(null);
         createMenuBar();
@@ -142,6 +140,8 @@ public class MyFrame extends JFrame {
     }
 
     private void initializeArea() {
+        textArea.setBounds(50, 50, 500, 500);
+
         textArea.addKeyListener(new KeyChecker(this));
 
         textArea.setVisible(true);

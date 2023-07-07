@@ -21,4 +21,3 @@ My i3 config for example:
 - Add multiple colors for different keywords. 
 - Add more functionality to the the menu bar.
 - Give buttons useful functionality or remove them.
-- Have the option to turn off syntax highlighting
