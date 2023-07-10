@@ -16,7 +16,7 @@ My i3 config for example:
 ![Alt text](https://github.com/w8ste/screenshotsMint/blob/main/javitor_i3.png)
 
 
-# TODO:
+### TODO:
 - Fix syntax highlighting, so that it updates a keyword correcty without having to press another key.
 - Add multiple colors for different keywords. 
 - Add more functionality to the the menu bar.
