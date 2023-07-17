@@ -40,7 +40,7 @@ public class MyFrame extends JFrame {
         makeButton();
         makeTextArea();
         this.setVisible(true);
-        callHighlight();
+        //callHighlight();
     }
 
     /*
