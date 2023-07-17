@@ -140,6 +140,7 @@ public class MyFrame extends JFrame {
     private void initializeArea() {
         textArea.setBounds(50, 50, 500, 500);
         textArea.addKeyListener(new KeyChecker(this));
+        this.addKeyListener(new KeyChecker(this));
         
         textArea.setVisible(true);
         textArea.setLayout(null);
