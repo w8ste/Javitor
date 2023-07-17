@@ -16,7 +16,7 @@ public class MyFrame extends JFrame {
      * 1: Java
      */
     private int lang = 0;
-
+     
     private JTextPane textArea;
     JMenuBar menuBar;
     JMenu fileMenu;
@@ -105,7 +105,6 @@ public class MyFrame extends JFrame {
         if(lang == 1) {
             try
             {
-
                 StyledDocument document = textArea.getStyledDocument();
                 String text = document.getText(0, document.getLength());
                 Matcher matcher = pattern.matcher(text);
@@ -120,9 +119,8 @@ public class MyFrame extends JFrame {
 
                 /* After every match change color accordingly
                    StyleConstants.setForeground(keyword, Color.BLUE); */
-
-                StyleConstants.setForeground(keyword, Color.BLACK);
-                document.setCharacterAttributes(document.getLength(), 1, keyword, true);
+                //StyleConstants.setForeground(keyword, Color.BLACK);
+                //document.setCharacterAttributes(document.getLength(), 1, keyword, true);
             }
             catch (Exception e) { System.out.println(e); }
         }
@@ -141,9 +139,8 @@ public class MyFrame extends JFrame {
 
     private void initializeArea() {
         textArea.setBounds(50, 50, 500, 500);
-
         textArea.addKeyListener(new KeyChecker(this));
-
+        
         textArea.setVisible(true);
         textArea.setLayout(null);
         JPanel areaPanel = new JPanel();
