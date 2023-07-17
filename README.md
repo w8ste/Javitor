@@ -15,6 +15,11 @@ My i3 config for example:
 
 ![Alt text](https://github.com/w8ste/screenshotsMint/blob/main/javitor_i3.png)
 
+### Idea
+The idea behing Javitor is to create a code editor experience which reminds the user of
+classic text editors, which can be found in your typical office suite. Because people, which are 
+just starting out with coding, usually have used one of these before and your standard code editors can 
+be intimidating for complete beginners in the coding sphere.
 
 ### TODO:
 - Add multiple colors for different keywords. 
