@@ -7,7 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.util.Timer;
 
 public class MyFrame extends JFrame {
     
@@ -35,8 +35,7 @@ public class MyFrame extends JFrame {
         makeButton();
         makeTextArea();
         this.setVisible(true);
-
-
+        callHighlight();
     }
 
     /*
@@ -51,6 +50,12 @@ public class MyFrame extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+    
+    private void callHighlight() {
+        Timer timer = new Timer();
+        TimerTk tt = new TimerTk(this);
+        timer.scheduleAtFixedRate(tt, 0, 1);
     }
 
     public void makeButton() {
@@ -68,8 +73,6 @@ public class MyFrame extends JFrame {
         newFileButton.setText("New File");
         newFileButton.setSize(100, 35);
         newFileButton.addActionListener(e -> new MyFrame());
-
-
 
         JButton clearButton = new JButton();
         clearButton.setText("Highlight");
@@ -139,8 +142,6 @@ public class MyFrame extends JFrame {
 
     private void initializeArea() {
         textArea.setBounds(50, 50, 500, 500);
-        textArea.addKeyListener(new KeyChecker(this));
-        this.addKeyListener(new KeyChecker(this));
         
         textArea.setVisible(true);
         textArea.setLayout(null);
@@ -155,7 +156,6 @@ public class MyFrame extends JFrame {
         areaPanel.add(scrollPane, BorderLayout.CENTER);
 
         this.add(areaPanel);
-
     }
 
     private void createMenuBar() {
@@ -168,7 +168,6 @@ public class MyFrame extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
-
     public void setLang(int value) {
         if(value >= 0 && value < 3) {
             lang = value;
@@ -177,6 +176,11 @@ public class MyFrame extends JFrame {
 
 }
 
+/*
+ * handling index highlighting with this 
+ * has some problems, which is why i 
+ * currenty don't use it anymore
+ */
 class KeyChecker extends KeyAdapter {
     MyFrame myFrame;
     public KeyChecker(MyFrame myFrame) {
