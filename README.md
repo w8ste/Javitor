@@ -17,7 +17,6 @@ My i3 config for example:
 
 
 ### TODO:
-- Fix syntax highlighting, so that it updates a keyword correcty without having to press another key.
 - Add multiple colors for different keywords. 
 - Add more functionality to the the menu bar.
 - Give buttons useful functionality or remove them.
