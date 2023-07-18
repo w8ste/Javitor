@@ -11,7 +11,7 @@ public class TimerTk extends TimerTask {
     public void run() {
         if(count < 20) {
             count++;
-            myFrame.highlight();
+            myFrame.getHighlighter().highlight(myFrame.getLang());
         } 
     }
 }

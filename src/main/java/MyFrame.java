@@ -16,20 +16,17 @@ public class MyFrame extends JFrame {
      * 1: Java
      */
     private int lang = 0;
-     
     private JTextPane textArea;
     JMenuBar menuBar;
     JMenu fileMenu;
     JMenuItem openItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
-    
-
+    Highlighter highlighter;    
 
     public MyFrame() {
         this("");
     }
-
     /*
      only used when creating a frame with content inside
      e.g. when loading a file
@@ -173,6 +170,7 @@ public class MyFrame extends JFrame {
         areaPanel.add(scrollPane, BorderLayout.CENTER);
 
         this.add(areaPanel);
+        this.highlighter = new Highlighter(textArea);    
     }
 
     private void createMenuBar() {
@@ -190,6 +188,14 @@ public class MyFrame extends JFrame {
             lang = value;
         }
     }
+
+    public int getLang() {
+        return this.lang;
+    }
+
+    public Highlighter getHighlighter() {
+        return this.highlighter;
+    } 
 
 }
 
