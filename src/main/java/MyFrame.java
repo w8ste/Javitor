@@ -23,7 +23,7 @@ public class MyFrame extends JFrame {
     JMenuItem openItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
-    
+        
     String regex = "\\b(class|int|void|static|final|public|private|protected|float|if|else|for|while|try|catch|boolean|import|return)\\b";
     Pattern pattern = Pattern.compile(regex);
 
@@ -120,9 +120,6 @@ public class MyFrame extends JFrame {
 
                 /* After every match change color accordingly
                    StyleConstants.setForeground(keyword, Color.BLUE); */
-
-                StyleConstants.setForeground(keyword, Color.BLACK);
-                document.setCharacterAttributes(document.getLength(), 1, keyword, true);
             }
             catch (Exception e) { System.out.println(e); }
         }
