@@ -27,13 +27,7 @@ public class MyFrame extends JFrame {
 
 
     public MyFrame() {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.pack();
-        this.setLocationRelativeTo(null);
-        createMenuBar();
-        makeButton();
-        makeTextArea();
-        this.setVisible(true);
+        this("");
     }
 
     /*
@@ -116,6 +110,7 @@ public class MyFrame extends JFrame {
     private void matchRed() {
     
         SimpleAttributeSet keyword = new SimpleAttributeSet();
+        // this regex descripes all the left over keywords for now
         String regex = "\\b(class|public|private|protected|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b";
         Pattern pattern = Pattern.compile(regex);
         
@@ -155,6 +150,8 @@ public class MyFrame extends JFrame {
         }
         catch (Exception e) { System.out.println(e); }
     }
+
+
 
     public void makeTextArea() {
         textArea = new JTextPane();
