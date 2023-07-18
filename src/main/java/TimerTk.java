@@ -1,14 +1,11 @@
 import java.util.TimerTask;
-import java.util.Timer;
 public class TimerTk extends TimerTask {
     
     private MyFrame myFrame;
-    private Timer timer;
     private int count = 0;
 
-    public TimerTk(MyFrame myFrame, Timer timer) {
+    public TimerTk(MyFrame myFrame) {
         this.myFrame = myFrame;
-        this.timer = timer;
     }
     @Override
     public void run() {

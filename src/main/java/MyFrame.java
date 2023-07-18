@@ -44,12 +44,6 @@ public class MyFrame extends JFrame {
         this.setVisible(true);
     }
     
-    public void callHighlight() {
-        Timer timer = new Timer();
-        TimerTk tt = new TimerTk(this, timer);
-        timer.scheduleAtFixedRate(tt, 0, 1);
-    }
-
     public void makeButton() {
 
         JPanel buttonPanel = new JPanel();
@@ -212,7 +206,7 @@ class KeyChecker extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         Timer timer = new Timer();
-        TimerTk timerTk = new TimerTk(myFrame, timer);
+        TimerTk timerTk = new TimerTk(myFrame);
         timer.scheduleAtFixedRate(timerTk, 0, 1);
     }
 }
