@@ -7,7 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.util.Timer;
 
 public class MyFrame extends JFrame {
     
@@ -16,16 +16,21 @@ public class MyFrame extends JFrame {
      * 1: Java
      */
     private int lang = 0;
-
+     
     private JTextPane textArea;
     JMenuBar menuBar;
     JMenu fileMenu;
     JMenuItem openItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
-        
-    String regex = "\\b(class|int|void|static|final|public|private|protected|float|if|else|for|while|try|catch|boolean|import|return)\\b";
+    
+    // general regex
+    String regex = "\\b(class|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b";
     Pattern pattern = Pattern.compile(regex);
+
+    //scope regex
+    String regexScope = "\\b(public|private|protected)\\b";
+    Pattern scopePattern = Pattern.compile(regexScope);
 
     public MyFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -35,8 +40,6 @@ public class MyFrame extends JFrame {
         makeButton();
         makeTextArea();
         this.setVisible(true);
-
-
     }
 
     /*
@@ -51,6 +54,12 @@ public class MyFrame extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+    
+    public void callHighlight() {
+        Timer timer = new Timer();
+        TimerTk tt = new TimerTk(this, timer);
+        timer.scheduleAtFixedRate(tt, 0, 1);
     }
 
     public void makeButton() {
@@ -68,8 +77,6 @@ public class MyFrame extends JFrame {
         newFileButton.setText("New File");
         newFileButton.setSize(100, 35);
         newFileButton.addActionListener(e -> new MyFrame());
-
-
 
         JButton clearButton = new JButton();
         clearButton.setText("Highlight");
@@ -103,26 +110,47 @@ public class MyFrame extends JFrame {
             }catch(Exception e) { System.out.println(e); }
         }
         if(lang == 1) {
-            try
-            {
-
-                StyledDocument document = textArea.getStyledDocument();
-                String text = document.getText(0, document.getLength());
-                Matcher matcher = pattern.matcher(text);
-
-                document.setCharacterAttributes(0, document.getLength(), keyword, true);
-                StyleConstants.setForeground(keyword, Color.RED);
-                //create multiple matcher for different kinds of code ?
-
-                while(matcher.find()) {
-                    document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
-                }
-
-                /* After every match change color accordingly
-                   StyleConstants.setForeground(keyword, Color.BLUE); */
-            }
-            catch (Exception e) { System.out.println(e); }
+            matchRed();
+            matchScope();
         }
+    }
+
+    private void matchRed() {
+    
+        SimpleAttributeSet keyword = new SimpleAttributeSet();
+        
+        try {
+            StyledDocument document = textArea.getStyledDocument();
+            String text = document.getText(0, document.getLength());
+            Matcher matcher = pattern.matcher(text);
+
+            document.setCharacterAttributes(0, document.getLength(), keyword, true);
+            StyleConstants.setForeground(keyword, Color.RED);
+
+            while(matcher.find()) {
+                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
+            }
+        }
+        catch (Exception e) { System.out.println(e); }
+    }
+
+    private void matchScope() {
+    
+        SimpleAttributeSet keyword = new SimpleAttributeSet();
+        
+        try {
+            StyledDocument document = textArea.getStyledDocument();
+            String text = document.getText(0, document.getLength());
+            Matcher matcher = scopePattern.matcher(text);
+
+            document.setCharacterAttributes(0, document.getLength(), keyword, false);
+            StyleConstants.setForeground(keyword, Color.GREEN);
+
+            while(matcher.find()) {
+                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, false);
+            }
+        }
+        catch (Exception e) { System.out.println(e); }
     }
 
     public void makeTextArea() {
@@ -138,9 +166,7 @@ public class MyFrame extends JFrame {
 
     private void initializeArea() {
         textArea.setBounds(50, 50, 500, 500);
-
-        textArea.addKeyListener(new KeyChecker(this));
-
+        textArea.addKeyListener(new KeyChecker(this)); 
         textArea.setVisible(true);
         textArea.setLayout(null);
         JPanel areaPanel = new JPanel();
@@ -154,7 +180,6 @@ public class MyFrame extends JFrame {
         areaPanel.add(scrollPane, BorderLayout.CENTER);
 
         this.add(areaPanel);
-
     }
 
     private void createMenuBar() {
@@ -167,7 +192,6 @@ public class MyFrame extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
-
     public void setLang(int value) {
         if(value >= 0 && value < 3) {
             lang = value;
@@ -176,6 +200,11 @@ public class MyFrame extends JFrame {
 
 }
 
+/*
+ * handling index highlighting with this 
+ * has some problems, which is why i 
+ * currenty don't use it anymore
+ */
 class KeyChecker extends KeyAdapter {
     MyFrame myFrame;
     public KeyChecker(MyFrame myFrame) {
@@ -183,7 +212,9 @@ class KeyChecker extends KeyAdapter {
     }
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        myFrame.highlight();
+        Timer timer = new Timer();
+        TimerTk timerTk = new TimerTk(myFrame, timer);
+        timer.scheduleAtFixedRate(timerTk, 0, 1);
     }
 }
 

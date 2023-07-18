@@ -2,9 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.LinkedList;
-
 
 public class LoadButton extends JButton {
 
@@ -22,7 +20,6 @@ public class LoadButton extends JButton {
             int response = chooser.showOpenDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
                 File file = chooser.getSelectedFile();
-                //This is where a real application would open the file.
                 try(FileReader fileReader = new FileReader(file)) {
                     int data = fileReader.read();
                     LinkedList<Character> list = new LinkedList<>();
