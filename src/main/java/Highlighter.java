@@ -38,8 +38,9 @@ public class Highlighter{
         StyleConstants.setForeground(keyword, Color.BLACK);
         if(lang == 0) noHighlight();
         else {
-            javaHighlight("\\b(class|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b", Color.RED, true);
+            javaHighlight("\\b(class|int|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b", Color.RED, true);
             javaHighlight("\\b(public|private|protected)\\b", Color.GREEN, false);
+            javaHighlight("\\b(void)\\b", Color.BLUE, false); //void oben wieder einfügen
         }
     }
 
