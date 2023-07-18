@@ -24,13 +24,7 @@ public class MyFrame extends JFrame {
     JMenuItem saveItem;
     JMenuItem exitItem;
     
-    // general regex
-    String regex = "\\b(class|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b";
-    Pattern pattern = Pattern.compile(regex);
 
-    //scope regex
-    String regexScope = "\\b(public|private|protected)\\b";
-    Pattern scopePattern = Pattern.compile(regexScope);
 
     public MyFrame() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -98,6 +92,10 @@ public class MyFrame extends JFrame {
         SimpleAttributeSet keyword = new SimpleAttributeSet();
         StyleConstants.setForeground(keyword, Color.BLACK);
         if(lang == 0) {
+            // general regex
+            String regex = "\\b(class|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b";
+            Pattern pattern = Pattern.compile(regex);
+
             try{
                 StyledDocument document= textArea.getStyledDocument();
                 String text = document.getText(0, document.getLength());
@@ -118,6 +116,8 @@ public class MyFrame extends JFrame {
     private void matchRed() {
     
         SimpleAttributeSet keyword = new SimpleAttributeSet();
+        String regex = "\\b(class|public|private|protected|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b";
+        Pattern pattern = Pattern.compile(regex);
         
         try {
             StyledDocument document = textArea.getStyledDocument();
@@ -137,7 +137,10 @@ public class MyFrame extends JFrame {
     private void matchScope() {
     
         SimpleAttributeSet keyword = new SimpleAttributeSet();
-        
+        //scope regex
+        String regexScope = "\\b(public|private|protected)\\b";
+        Pattern scopePattern = Pattern.compile(regexScope);
+
         try {
             StyledDocument document = textArea.getStyledDocument();
             String text = document.getText(0, document.getLength());
