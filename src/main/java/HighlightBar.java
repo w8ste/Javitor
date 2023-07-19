@@ -31,12 +31,12 @@ public class HighlightBar extends JMenu implements ActionListener {
         if(e.getSource().equals(noHighlight)) {
             //set to no highlight with 0
             frame.setLang(0);
-            frame.highlight();
+            frame.getHighlighter().highlight(frame.getLang());
         }
         else if(e.getSource().equals(javaHighlight)) {
             //set to java with 1
             frame.setLang(1);
-            frame.highlight();
+            frame.getHighlighter().highlight(frame.getLang());
         }
     }
 } 
