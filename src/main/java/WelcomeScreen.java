@@ -12,7 +12,7 @@ public class WelcomeScreen extends JFrame{
 
         this.setSize(new Dimension(500, 500));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         createPanel();
 
         this.add(panel);
