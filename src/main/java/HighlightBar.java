@@ -14,7 +14,7 @@ public class HighlightBar extends JMenu implements ActionListener {
         //create the no highlight option
         this.noHighlight = new JMenuItem("No highlighting");
         noHighlight.addActionListener(this);
-
+          
         //create java highltighting option
         this.javaHighlight = new JMenuItem("Java highlighting");
         javaHighlight.addActionListener(this);
