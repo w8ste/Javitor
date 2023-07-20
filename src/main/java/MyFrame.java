@@ -71,6 +71,8 @@ public class MyFrame extends JFrame {
 
     public void makeTextArea(String s) {
         textArea = new JTextPane();
+        //setting background color works
+        //textArea.setBackground(Color.LIGHT_GRAY);
         textArea.setText(s);
         textArea.setBounds(50, 50, 500, 500);
         textArea.addKeyListener(new KeyChecker(this)); 
