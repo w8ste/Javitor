@@ -9,7 +9,7 @@ public class TimerTk extends TimerTask {
     }
     @Override
     public void run() {
-        if(count < 20) {
+        if(count < 1) {
             count++;
             myFrame.getHighlighter().highlight(myFrame.getLang());
         } 

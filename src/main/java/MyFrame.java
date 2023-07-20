@@ -1,12 +1,7 @@
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.Timer;
 
 public class MyFrame extends JFrame {
@@ -60,7 +55,7 @@ public class MyFrame extends JFrame {
         JButton clearButton = new JButton();
         clearButton.setText("Highlight");
         clearButton.setSize(100, 35);
-        clearButton.addActionListener(e -> highlight());
+        clearButton.addActionListener(e -> highlighter.highlight(1));
 
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
@@ -70,91 +65,13 @@ public class MyFrame extends JFrame {
         this.add(buttonPanel, BorderLayout.NORTH);
     }
 
-
-    void highlight()
-    {
-        SimpleAttributeSet keyword = new SimpleAttributeSet();
-        StyleConstants.setForeground(keyword, Color.BLACK);
-        if(lang == 0) {
-            // general regex
-            String regex = "\\b(class|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b";
-            Pattern pattern = Pattern.compile(regex);
-
-            try{
-                StyledDocument document= textArea.getStyledDocument();
-                String text = document.getText(0, document.getLength());
-                Matcher matcher = pattern.matcher(text);
-                document.setCharacterAttributes(0, document.getLength(), keyword, true);
-
-                while (matcher.find()) {
-                    document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
-                }
-            }catch(Exception e) { System.out.println(e); }
-        }
-        if(lang == 1) {
-            matchRed();
-            matchScope();
-        }
-    }
-
-    private void matchRed() {
-    
-        SimpleAttributeSet keyword = new SimpleAttributeSet();
-        // this regex descripes all the left over keywords for now
-        String regex = "\\b(class|public|private|protected|int|void|static|final|float|if|else|for|while|try|catch|boolean|import|return)\\b";
-        Pattern pattern = Pattern.compile(regex);
-        
-        try {
-            StyledDocument document = textArea.getStyledDocument();
-            String text = document.getText(0, document.getLength());
-            Matcher matcher = pattern.matcher(text);
-
-            document.setCharacterAttributes(0, document.getLength(), keyword, true);
-            StyleConstants.setForeground(keyword, Color.RED);
-
-            while(matcher.find()) {
-                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, true);
-            }
-        }
-        catch (Exception e) { System.out.println(e); }
-    }
-
-    private void matchScope() {
-    
-        SimpleAttributeSet keyword = new SimpleAttributeSet();
-        //scope regex
-        String regexScope = "\\b(public|private|protected)\\b";
-        Pattern scopePattern = Pattern.compile(regexScope);
-
-        try {
-            StyledDocument document = textArea.getStyledDocument();
-            String text = document.getText(0, document.getLength());
-            Matcher matcher = scopePattern.matcher(text);
-
-            document.setCharacterAttributes(0, document.getLength(), keyword, false);
-            StyleConstants.setForeground(keyword, Color.GREEN);
-
-            while(matcher.find()) {
-                document.setCharacterAttributes(matcher.start(), (matcher.end() - matcher.start()), keyword, false);
-            }
-        }
-        catch (Exception e) { System.out.println(e); }
-    }
-
-
-
     public void makeTextArea() {
-        textArea = new JTextPane();
-        initializeArea();
+        makeTextArea("");
     }
 
     public void makeTextArea(String s) {
         textArea = new JTextPane();
         textArea.setText(s);
-        initializeArea();
-    }
-
-    private void initializeArea() {
         textArea.setBounds(50, 50, 500, 500);
         textArea.addKeyListener(new KeyChecker(this)); 
         textArea.setVisible(true);
