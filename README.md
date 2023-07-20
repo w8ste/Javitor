@@ -4,7 +4,7 @@
 ![Alt text](https://github.com/w8ste/screenshots/blob/main/javitor_home.png)
 
 Javitor is a text editor written in Java. I started this projects due to my interest in text editors like vim.
-I choose Java since i wanted to practice it, since it is the most thought programming language in lower semesters 
+I choose Java since i wanted to practice it, because it is the most used programming language in lower semesters 
 at my univerity. It is still in its early stage but already has all of the utilities a very minimal code/text editor 
 has. For instance, basic syntax highlighting:
 
