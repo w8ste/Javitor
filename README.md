@@ -25,3 +25,4 @@ be intimidating for complete beginners in the coding sphere.
 - Add multiple colors for different keywords. 
 - Add more functionality to the the menu bar.
 - Give buttons useful functionality or remove them.
+- Improve highlighting feature
