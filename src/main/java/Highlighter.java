@@ -15,7 +15,7 @@ public class Highlighter{
     public Highlighter(JTextPane textArea) {
         this.textArea = textArea;
     }
-
+     
     public void highlight(int lang) {
         if(lang == 0) noHighlight();
         else {

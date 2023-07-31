@@ -7,7 +7,7 @@ public class WelcomeScreen extends JFrame{
     private JLabel titleLabel;
     private JPanel buttonPanel;
     private JPanel panel;
-
+    
     WelcomeScreen(){
 
         this.setSize(new Dimension(500, 500));
